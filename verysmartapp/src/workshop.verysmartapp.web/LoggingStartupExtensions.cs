@@ -1,6 +1,9 @@
 using System;
 using Microsoft.Extensions.Hosting;
+using Prometheus;
 using Serilog;
+using Serilog.Core;
+using Serilog.Events;
 using Serilog.Sinks.Elasticsearch;
 
 namespace workshop.verysmartapp.web
@@ -25,7 +28,17 @@ namespace workshop.verysmartapp.web
                         .ReadFrom.Configuration(configuration)
                         .Enrich.FromLogContext()
                         .WriteTo.Console()
-                        .WriteTo.Elasticsearch(elasticsearchSinkOptions);
+                        .WriteTo.Elasticsearch(elasticsearchSinkOptions)
+                        .WriteTo.Sink<PrometheusLogEventSink>();
                 });
+        
+        private class PrometheusLogEventSink : ILogEventSink
+        {
+            private static readonly Counter LogEventCountByLevel
+                = Metrics.CreateCounter("verysmartapp_events_total", "Total number of Serilog events", "level");
+
+            public void Emit(LogEvent logEvent)
+                => LogEventCountByLevel.WithLabels(logEvent.Level.ToString()).Inc();
+        }
     }
 }
