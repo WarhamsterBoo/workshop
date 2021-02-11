@@ -7,6 +7,14 @@ services:
     environment:
       discovery.type: "single-node"
 
+  elasticsearch_exporter:
+    image: justwatch/elasticsearch_exporter:1.1.0
+    command:
+      - '--es.uri=http://elastic:9200'
+    restart: always
+    ports:
+      - "9114:9114"
+
   kibana:
     image: docker.elastic.co/kibana/kibana:7.11.0
     ports:
