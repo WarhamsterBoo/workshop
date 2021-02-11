@@ -1,0 +1,12 @@
+groups:
+  - name: alert.rules
+
+    rules:
+    - alert: TestAlert
+      expr: verysmartapp_events_total{level="Information"} > 100
+      for: 1m
+      labels:
+        severity: page
+      annotations:
+        summary: "Something went wrong!"
+        description: "Something went wrong!"
