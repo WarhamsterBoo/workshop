@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Prometheus;
 
 namespace workshop.verysmartapp.web
 {
@@ -25,12 +26,15 @@ namespace workshop.verysmartapp.web
             }
 
             app.UseRouting();
+            app.UseHttpMetrics();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     "default",
                     "{controller}/{action}");
+
+                endpoints.MapMetrics();
             });
         }
     }
