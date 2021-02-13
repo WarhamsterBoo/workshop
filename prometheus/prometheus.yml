@@ -7,9 +7,9 @@ scrape_configs:
     static_configs:
       - targets: ['prometheus:9090']
 
-  # - job_name: workshop_example_app
-  #   static_configs:
-  #     - targets: ['example_app:5000']
+  - job_name: workshop_example_app
+    static_configs:
+      - targets: ['example_app:5000']
 
   # - job_name: elasticsearch
   #   static_configs:
