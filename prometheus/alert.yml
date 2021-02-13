@@ -2,11 +2,11 @@ groups:
   - name: alert.rules
 
     rules:
-    - alert: TestAlert
-      expr: verysmartapp_events_total{level="Information"} > 100
-      for: 1m
+    - alert: WorkshopExampleAppIsDown
+      expr: up == 0
+      for: 20s
       labels:
         severity: page
       annotations:
-        summary: "Something went wrong!"
-        description: "Something went wrong!"
+        summary: "Instance {{ $labels.instance }} is down."
+        description: "Instance {{ $labels.instance }} of job {{ $labels.job }} has not been providing any metrics for 20 seconds."

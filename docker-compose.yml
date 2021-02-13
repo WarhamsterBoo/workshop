@@ -31,12 +31,12 @@ services:
       - '--web.enable-lifecycle'
       - '--config.file=/etc/prometheus/prometheus.yml'
 
-  # alertmanager:
-  #   image: "prom/alertmanager"
-  #   ports:
-  #     - "9093:9093"
-  #   volumes:
-  #     - "./alertmanager/:/etc/alertmanager/"
+  alertmanager:
+    image: "prom/alertmanager"
+    ports:
+      - "9093:9093"
+    volumes:
+      - "./alertmanager/:/etc/alertmanager/"
 
   # grafana:
   #   image: grafana/grafana

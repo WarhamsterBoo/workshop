@@ -5,6 +5,7 @@ route:
   receiver: 'slack-notifications'
 
 receivers:
-- name: 'slack-notifications'
-  slack_configs:
-  - channel: '#general'
+  - name: 'slack-notifications'
+    slack_configs:
+      - channel: '#general'
+        text: "<!channel> \nsummary: {{ .CommonAnnotations.summary }}\ndescription: {{ .CommonAnnotations.description }}"

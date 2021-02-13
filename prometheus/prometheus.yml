@@ -15,12 +15,12 @@ scrape_configs:
   #   static_configs:
   #     - targets: ['elasticsearch_exporter:9114']
 
-# rule_files:
-#   - "alert.yml"
+rule_files:
+  - "alert.yml"
 
-# alerting:
-#   alertmanagers:
-#     - scheme: http
-#       static_configs:
-#         - targets:
-#           - "alertmanager:9093"
+alerting:
+  alertmanagers:
+    - scheme: http
+      static_configs:
+        - targets:
+          - "alertmanager:9093"
