@@ -5,22 +5,22 @@ global:
 scrape_configs:
   - job_name: prometheus
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ['prometheus:9090']
 
-  - job_name: verysmartapp
-    static_configs:
-      - targets: ['host.docker.internal:5000']
+  # - job_name: workshop_example_app
+  #   static_configs:
+  #     - targets: ['example_app:5000']
 
-  - job_name: elasticsearch
-    static_configs:
-      - targets: ['elasticsearch_exporter:9114']
+  # - job_name: elasticsearch
+  #   static_configs:
+  #     - targets: ['elasticsearch_exporter:9114']
 
-rule_files:
-  - "alert.yml"
+# rule_files:
+#   - "alert.yml"
 
-alerting:
-  alertmanagers:
-    - scheme: http
-      static_configs:
-        - targets:
-          - "alertmanager:9093"
+# alerting:
+#   alertmanagers:
+#     - scheme: http
+#       static_configs:
+#         - targets:
+#           - "alertmanager:9093"
