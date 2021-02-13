@@ -1,5 +1,14 @@
 services:
-  elastic:
+  example_app:
+    image: workshop_example_app:latest
+    ports:
+      - "5000:5000"
+    environment:
+      - ELASTIC_HOST=elasticsearch
+      - ELASTIC_PORT=9200
+      - USE_ELASTIC=true
+
+  elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.11.0
     ports:
       - "9200:9200"
@@ -7,38 +16,36 @@ services:
     environment:
       discovery.type: "single-node"
 
-  elasticsearch_exporter:
-    image: justwatch/elasticsearch_exporter:1.1.0
-    command:
-      - '--es.uri=http://elastic:9200'
-    restart: always
-    ports:
-      - "9114:9114"
-
   kibana:
     image: docker.elastic.co/kibana/kibana:7.11.0
     ports:
       - "5601:5601"
-    links:
-      - "elastic:elasticsearch"
 
-  prometheus:
-    image: prom/prometheus
-    ports:
-      - "9090:9090"
-    volumes:
-      - "./prometheus/:/etc/prometheus/"
+  # prometheus:
+  #   image: prom/prometheus
+  #   ports:
+  #     - "9090:9090"
+  #   volumes:
+  #     - "./prometheus/:/etc/prometheus/"
 
-  alertmanager:
-    image: "prom/alertmanager"
-    ports:
-      - "9093:9093"
-    volumes:
-      - "./alertmanager/:/etc/alertmanager/"
+  # alertmanager:
+  #   image: "prom/alertmanager"
+  #   ports:
+  #     - "9093:9093"
+  #   volumes:
+  #     - "./alertmanager/:/etc/alertmanager/"
 
-  grafana:
-    image: grafana/grafana
-    ports:
-      - "3000:3000"
-    volumes:
-      - "./grafana/provisioning/:/etc/grafana/provisioning/"
+  # grafana:
+  #   image: grafana/grafana
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - "./grafana/provisioning/:/etc/grafana/provisioning/"
+
+  # elasticsearch_exporter:
+  #   image: justwatch/elasticsearch_exporter:1.1.0
+  #   command:
+  #     - '--es.uri=http://elasticsearch:9200'
+  #   restart: always
+  #   ports:
+  #     - "9114:9114"
