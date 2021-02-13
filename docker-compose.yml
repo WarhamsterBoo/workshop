@@ -1,8 +1,17 @@
 services:
-  example_app:
+  example_app_0:
     image: workshop_example_app:latest
     ports:
       - "5000:5000"
+    environment:
+      - ELASTIC_HOST=elasticsearch
+      - ELASTIC_PORT=9200
+      - USE_ELASTIC=true
+
+  example_app_1:
+    image: workshop_example_app:latest
+    ports:
+      - "5001:5000"
     environment:
       - ELASTIC_HOST=elasticsearch
       - ELASTIC_PORT=9200
@@ -38,12 +47,12 @@ services:
     volumes:
       - "./alertmanager/:/etc/alertmanager/"
 
-  # grafana:
-  #   image: grafana/grafana
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - "./grafana/provisioning/:/etc/grafana/provisioning/"
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./grafana/provisioning/:/etc/grafana/provisioning/"
 
   elasticsearch_exporter:
     image: justwatch/elasticsearch_exporter:1.1.0
