@@ -45,10 +45,10 @@ services:
   #   volumes:
   #     - "./grafana/provisioning/:/etc/grafana/provisioning/"
 
-  # elasticsearch_exporter:
-  #   image: justwatch/elasticsearch_exporter:1.1.0
-  #   command:
-  #     - '--es.uri=http://elasticsearch:9200'
-  #   restart: always
-  #   ports:
-  #     - "9114:9114"
+  elasticsearch_exporter:
+    image: justwatch/elasticsearch_exporter:1.1.0
+    command:
+      - '--es.uri=http://elasticsearch:9200'
+    restart: always
+    ports:
+      - "9114:9114"
