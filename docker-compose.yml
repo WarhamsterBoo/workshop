@@ -1,6 +1,6 @@
 services:
   example_app_0:
-    image: workshop_example_app:latest
+    image: warhamsterboo/workshop_example_app:latest
     ports:
       - "5000:5000"
     environment:
@@ -9,7 +9,7 @@ services:
       - USE_ELASTIC=true
 
   example_app_1:
-    image: workshop_example_app:latest
+    image: warhamsterboo/workshop_example_app:latest
     ports:
       - "5001:5000"
     environment:
