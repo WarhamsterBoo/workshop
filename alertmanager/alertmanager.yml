@@ -2,10 +2,24 @@ global:
   slack_api_url: ''
 
 route:
-  receiver: 'slack-notifications'
+  receiver: 'warning'
+
+  routes:
+    - match:
+        severity: warning
+      receiver: warning
+
+    - match:
+        severity: critical
+      receiver: critical
 
 receivers:
-  - name: 'slack-notifications'
+  - name: 'warning'
+    slack_configs:
+      - channel: '#random'
+        text: "<!channel> \nsummary: {{ .CommonAnnotations.summary }}\ndescription: {{ .CommonAnnotations.description }}"
+
+  - name: 'critical'
     slack_configs:
       - channel: '#general'
         text: "<!channel> \nsummary: {{ .CommonAnnotations.summary }}\ndescription: {{ .CommonAnnotations.description }}"

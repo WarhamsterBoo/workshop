@@ -6,10 +6,19 @@ groups:
       expr: up == 0
       for: 20s
       labels:
-        severity: critical
+        severity: warning
       annotations:
         summary: "Instance {{ $labels.instance }} is down."
         description: "Instance {{ $labels.instance }} of job {{ $labels.job }} has not been providing any metrics for 20 seconds."
+
+    - alert: WorkshopExampleAppIsDown
+      expr: up == 0
+      for: 40s
+      labels:
+        severity: critical
+      annotations:
+        summary: "Instance {{ $labels.instance }} is down."
+        description: "Instance {{ $labels.instance }} of job {{ $labels.job }} has not been providing any metrics for 40 seconds."
 
     - alert: HighRateOf5XXResponses
       expr: sum(rate(workshop_example_app_http_requests_total{status="5XX"}[1m])) by (job) > 2
