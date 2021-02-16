@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
   "links": [],
   "panels": [
     {
@@ -66,7 +65,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(workshop_example_app_process_cpu_seconds_total[2m]) ",
+          "expr": "rate(workshop_example_app_process_cpu_seconds_total[1m]) ",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -76,7 +75,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "CPU",
+      "title": "CPU usage per second",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -93,7 +92,7 @@
       "yaxes": [
         {
           "$$hashKey": "object:38",
-          "format": "short",
+          "format": "ms",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -222,7 +221,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "workshop_example_app_process_resident_memory_bytes / 1024 / 1024",
+          "expr": "workshop_example_app_process_resident_memory_bytes",
           "instant": false,
           "interval": "",
           "legendFormat": "{{instance}}",
@@ -250,7 +249,7 @@
       "yaxes": [
         {
           "$$hashKey": "object:58",
-          "format": "short",
+          "format": "bytes",
           "label": "MB",
           "logBase": 1,
           "max": null,
@@ -371,7 +370,7 @@
     },
     {
       "aliasColors": {},
-      "bars": false,
+      "bars": true,
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
@@ -400,7 +399,7 @@
         "total": false,
         "values": false
       },
-      "lines": true,
+      "lines": false,
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
@@ -417,9 +416,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(workshop_example_app_http_request_duration_seconds_count{status=\"5XX\"}[1m])) by (instance)",
+          "expr": "sum(rate(workshop_example_app_http_requests_total{status=\"5XX\"}[1m])) by (route)",
           "interval": "",
-          "legendFormat": "{{instance}}",
+          "legendFormat": "{{route}}",
           "refId": "A"
         }
       ],
@@ -427,7 +426,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Errors",
+      "title": "5XX per second",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -514,7 +513,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.95, sum(rate(workshop_example_app_http_request_duration_seconds_bucket[1m])) by (le, route))",
+          "expr": "histogram_quantile(0.95, sum(rate(workshop_example_app_http_request_duration_seconds_bucket[1m])) by (le, instance))",
           "interval": "",
           "legendFormat": "{{route}}",
           "refId": "A"
@@ -524,7 +523,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Latency",
+      "title": "Latency by instance",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -564,7 +563,7 @@
       }
     }
   ],
-  "refresh": "",
+  "refresh": "10s",
   "schemaVersion": 27,
   "style": "dark",
   "tags": [],
@@ -579,5 +578,5 @@
   "timezone": "",
   "title": "Test dashboard",
   "uid": "mO7Il0PMz",
-  "version": 2
+  "version": 1
 }

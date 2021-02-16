@@ -10,3 +10,12 @@ groups:
       annotations:
         summary: "Instance {{ $labels.instance }} is down."
         description: "Instance {{ $labels.instance }} of job {{ $labels.job }} has not been providing any metrics for 20 seconds."
+
+    - alert: HighRateOf5XXResponses
+      expr: sum(rate(workshop_example_app_http_requests_total{status="5XX"}[1m])) by (job) > 2
+      for: 20s
+      labels:
+        severity: page
+      annotations:
+        summary: "High rate of 5XX responses!"
+        description: "Job {{ $labels.job }} is experiencing a hight rate of 5XX responses for 20 seconds.."
