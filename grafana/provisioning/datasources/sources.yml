@@ -1,0 +1,22 @@
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: "direct"
+    url: "http://localhost:9090"
+    isDefault: true
+    editable: true
+
+  - name: Elasticsearch
+    type: elasticsearch
+    url: "http://elasticsearch:9200"
+    isDefault: false
+    editable: true
+    database: "work*"
+    jsonData:
+      esVersion: 70
+      logLevelField: ""
+      logMessageField: ""
+      maxConcurrentShardRequests: 5
+      timeField: "@timestamp"
