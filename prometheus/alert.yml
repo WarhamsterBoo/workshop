@@ -6,7 +6,7 @@ groups:
       expr: up == 0
       for: 20s
       labels:
-        severity: page
+        severity: critical
       annotations:
         summary: "Instance {{ $labels.instance }} is down."
         description: "Instance {{ $labels.instance }} of job {{ $labels.job }} has not been providing any metrics for 20 seconds."
@@ -15,7 +15,16 @@ groups:
       expr: sum(rate(workshop_example_app_http_requests_total{status="5XX"}[1m])) by (job) > 2
       for: 20s
       labels:
-        severity: page
+        severity: critical
       annotations:
         summary: "High rate of 5XX responses!"
-        description: "Job {{ $labels.job }} is experiencing a hight rate of 5XX responses for 20 seconds.."
+        description: "Job {{ $labels.job }} is experiencing a high rate of 5XX responses for 20 seconds.."
+
+    - alert: LatencyIsTooHigh
+      expr: histogram_quantile(0.95, sum(rate(workshop_example_app_http_request_duration_seconds_bucket[1m])) by (le, instance)) > 2.5
+      for: 20s
+      labels:
+        severity: critical
+      annotations:
+        summary: "Latency is too high!"
+        description: "Instance {{ $labels.instance }} is experiencing a high latency of {{ $value }} in 95 percentile for 20 seconds.."

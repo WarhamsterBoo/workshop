@@ -426,7 +426,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "5XX per second",
+      "title": "5XX responses per second",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -523,7 +523,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Latency by instance",
+      "title": "Latency (95q)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -540,7 +540,7 @@
       "yaxes": [
         {
           "$$hashKey": "object:253",
-          "format": "short",
+          "format": "s",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -563,7 +563,7 @@
       }
     }
   ],
-  "refresh": "10s",
+  "refresh": "5s",
   "schemaVersion": 27,
   "style": "dark",
   "tags": [],
