@@ -1,27 +1,27 @@
-global:
-  slack_api_url: 'https://hooks.slack.com/services/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'
+# global:
+#   slack_api_url: ''
 
-route:
-  receiver: 'warning'
+# route:
+#   receiver: 'warning'
 
-  routes:
-    - match:
-        severity: warning
-      receiver: warning
+#   routes:
+#     - match:
+#         severity: warning
+#       receiver: warning
 
-    - match:
-        severity: critical
-      receiver: critical
+#     - match:
+#         severity: critical
+#       receiver: critical
 
-receivers:
-  - name: 'warning'
-    slack_configs:
-      - channel: '#random'
-        text: "<!channel> \nsummary: {{ .CommonAnnotations.summary }}\ndescription: {{ .CommonAnnotations.description }}"
-        send_resolved: true
+# receivers:
+#   - name: 'warning'
+#     slack_configs:
+#       - channel: '#random'
+#         text: "<!channel> \nsummary: {{ .CommonAnnotations.summary }}\ndescription: {{ .CommonAnnotations.description }}"
+#         send_resolved: true
 
-  - name: 'critical'
-    slack_configs:
-      - channel: '#general'
-        text: "<!channel> \nsummary: {{ .CommonAnnotations.summary }}\ndescription: {{ .CommonAnnotations.description }}"
-        send_resolved: true
+#   - name: 'critical'
+#     slack_configs:
+#       - channel: '#general'
+#         text: "<!channel> \nsummary: {{ .CommonAnnotations.summary }}\ndescription: {{ .CommonAnnotations.description }}"
+#         send_resolved: true
