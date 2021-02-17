@@ -1,4 +1,5 @@
 global:
+  send_resolved: true
   slack_api_url: ''
 
 route:
