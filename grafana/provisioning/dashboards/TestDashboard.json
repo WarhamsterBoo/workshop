@@ -398,7 +398,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Errors rate",
+      "title": "Errors",
       "tooltip": {
         "shared": true,
         "sort": 0,
